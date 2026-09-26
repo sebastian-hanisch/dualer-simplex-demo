@@ -1,5 +1,8 @@
 # Dualer Simplex und Neuoptimierung – nach einer Änderung von der alten Basis weiterrechnen – Streamlit-Demo
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-dualer-simplex-demo.streamlit.app/)**
+
+
 Sechstes Stück der **Lineare-Programmierung-Reihe** der "Konzepte"-Reihe für die Website "Sebastian Hanisch – Operations Research und Machine Learning", Kind von [lp-dualitaet-demo](https://github.com/sebastian-hanisch/lp-dualitaet-demo). Das Stück davor hat die Wertfunktion und den Zukauf durch **Neulösung von Null** gerechnet. Muss man nach einer Änderung wirklich neu anfangen? Nein: ändert sich die **rechte Seite** (eine Kapazität) oder kommt eine **Nebenbedingung** dazu (Schnitt, Branching-Schranke), bleibt die alte Endbasis **dual zulässig** – alle reduzierten Kosten sind noch ≥ 0 –, aber sie ist **primal unzulässig**: ein x_B ist negativ. Für genau diese Lage ist der **duale Simplex** gebaut (Lemke 1954). Ändern sich **Deckungsbeiträge** oder kommt ein **neuer Dienst** dazu, bleibt die Basis primal zulässig, und der **primale Simplex** rechnet von der alten Basis weiter. Die Demo zählt die Pivots gegen den **Neustart von Null** (Zwei-Phasen-Simplex desselben Lösers). Vier Fragen, alle gemessen: **(1) Ein dualer Pivot** – was passiert in einem Schritt? **(2) Warm gegen kalt** – wie viele Pivots spart der Warmstart, und wann nicht? **(3) Ketten** – 50 Änderungen nacheinander (rollierender Horizont, Branching-Folge). **(4) Wertkurve** – die Kurve aus dem letzten Stück als warm fortgeführte Folge.
 
 **Einordnung in die Reihe:** geplant sind zwölf Stücke, dies ist das sechste (Details in `lp-planung/PLAN.md` des Portfolio-Ordners):
