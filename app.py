@@ -58,7 +58,7 @@ kommt eine **Nebenbedingung** dazu (Schnitt, Branching-Schranke), bleibt die alt
 **(3) Ketten** - 50 Änderungen nacheinander (rollierender Horizont, Branching-Folge). **(4) Wertkurve** - die Kurve aus dem letzten Stück als warm fortgeführte Folge.
 """
 )
-st.caption("Kind von [Dualität und Sensitivität](https://github.com/sebastian-hanisch/lp-dualitaet-demo). Folgestücke (Innere Punkte, Ellipsoid, Präsolve) sind [noch nicht gebaut].")
+st.caption("Kind von [Dualität und Sensitivität](https://github.com/sebastian-hanisch/lp-dualitaet-demo). Folgestücke (Präsolve, Ellipsoid, Innere Punkte) sind inzwischen gebaut: [praesolve-demo](https://github.com/sebastian-hanisch/praesolve-demo), [ellipsoid-demo](https://github.com/sebastian-hanisch/ellipsoid-demo), [innere-punkte-demo](https://github.com/sebastian-hanisch/innere-punkte-demo).")
 
 with st.expander("So funktioniert die Neuoptimierung", expanded=True):
     st.markdown(
@@ -280,6 +280,6 @@ Implementiert in `dsx_reopt.py` (Änderungen am Endtableau, dualer und primaler 
 st.markdown("---")
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
-    "Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung für "
-    "Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Lineare Programmierung: vom Tableau zum Crossover](https://sebastianhanisch.net/konzepte-lineare-programmierung.html)."
 )

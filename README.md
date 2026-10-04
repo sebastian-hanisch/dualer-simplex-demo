@@ -10,10 +10,10 @@ Sechstes Stück der **Lineare-Programmierung-Reihe** der "Konzepte"-Reihe für d
 ```
 Tableau-Simplex (Wurzel)                                                                  [gebaut: tableau-simplex-demo]
  ├─ Pivotregeln & Entartung ─ Simplex im schlimmsten und im typischen Fall (Klee-Minty)   [gebaut: pivotregeln-demo, klee-minty-demo]
- ├─ Revised Simplex ─ Präsolve, Skalierung & Numerik                                     [gebaut: revised-simplex-demo]  →  [nicht gebaut]
+ ├─ Revised Simplex ─ Präsolve, Skalierung & Numerik                                     [gebaut: revised-simplex-demo, praesolve-demo]
  ├─ Dualität & Sensitivität ─ Dualer Simplex & Neuoptimierung                            [gebaut: lp-dualitaet-demo]  →  [DIESES STÜCK]
- ├─ Ellipsoid-Methode (Kontrast: polynomial in der Theorie)                              [nicht gebaut]
- └─ Innere Punkte ─ PDLP (Verfahren erster Ordnung) ─ Crossover & Simplex gegen Innere Punkte gegen PDLP  [nicht gebaut]
+ ├─ Ellipsoid-Methode (Kontrast: polynomial in der Theorie)                              [gebaut: ellipsoid-demo]
+ └─ Innere Punkte ─ PDLP (Verfahren erster Ordnung) ─ Crossover & Simplex gegen Innere Punkte gegen PDLP  [gebaut: innere-punkte-demo, pdlp-demo, crossover-demo]
 ```
 
 Ergebnis in Kürze: **Der Warmstart spart fast immer sehr viel, aber nicht immer, und je größer die Änderung, desto weniger.** Auf Zufallsinstanzen 10 × 10 braucht der duale Simplex nach einer Änderung der rechten Seite um 10 % **5 bis 6 Pivots statt 278 bis 279 beim Neustart** (2 % der Pivots, in 90 % der Fälle gar keiner); bei +100 % sind es 52 gegen 280 (19 %). Ein Schnitt, der den alten Optimalpunkt auf das 0.5-fache abschneidet, kostet 144 gegen 239 Pivots (60 %), und **in 26 % der Fälle ist der Neustart nicht schlechter**; ein neuer Dienst mit doppeltem Deckungsbeitrag kostet 151 gegen 214 (71 %), in 40 % der Fälle ist der Neustart nicht schlechter, im Zentrum sogar **13 gegen 10 Pivots (Warmstart schlechter)**. **Ketten** sind die eigentliche Stärke: 50 zufällige Änderungen einer rechten Seite kosten zusammen **6 Pivots warm gegen 240 kalt**, in 45 von 50 Schritten war kein Pivot nötig. Die **Wertkurve** des Zentrums (41 Punkte) braucht warm **3 Pivots gegen 134 kalt**, bei 3 Basiswechseln: ein Pivot je Knickpunkt.
@@ -109,4 +109,4 @@ Tests: `pip install -r requirements-dev.txt` und `python -m pytest tests/ -W err
 - Forrest, J. J., & Goldfarb, D. (1992). *Steepest-edge simplex algorithms for linear programming.* Mathematical Programming 57, 341–374 (nur genannt).
 - Dantzig, G. B. (1963). *Linear Programming and Extensions.* Princeton University Press.
 
-Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning.
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Lineare Programmierung: vom Tableau zum Crossover](https://sebastianhanisch.net/konzepte-lineare-programmierung.html).
