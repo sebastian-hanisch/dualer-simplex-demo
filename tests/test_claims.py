@@ -68,7 +68,7 @@ def test_readme_parametric_curves():
                     ("r3", Settings("random", 10, 10, 35, resource=3))):
         p = ev.parametric(s)
         got[name] = (p["total_warm"], p["total_cold"], p["basis_changes"])
-    assert got == {"c0": (3, 134, 3), "c1": (4, 155, 4), "c2": (3, 130, 3), "r0": (5, 207, 4), "r3": (4, 154, 4)}
+    assert got == {"c0": (3, 134, 3), "c1": (4, 155, 4), "c2": (3, 130, 3), "r0": (5, 207, 5), "r3": (4, 154, 4)}
 
 
 def test_readme_dantzig_against_bland_for_the_dual_row_choice():

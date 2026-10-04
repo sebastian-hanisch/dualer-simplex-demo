@@ -296,3 +296,30 @@ def _cold(tab, note):
     if sol.status != "optimal":
         return Reopt(sol.status, "cold", sol.pivots, [], None, (), float("nan"), (), note)
     return Reopt("optimal", "cold", sol.pivots, [], new, new.x(), new.obj(), new.y(), note)
+
+
+def rhs_breakpoints(tab, i, b_to, rule="dantzig"):
+    """Zahl der Knickpunkte der Wertkurve z*(b_i) zwischen dem Ausgangswert und `b_to` (nach oben oder unten): vom Endtableau aus bis an die Grenze des Bereichs, in dem die Basis zulässig bleibt (x_B + t * d x_B / d b >= 0),
+    dann knapp darüber hinaus neu optimieren; ein Knick ist ein Wechsel des Schattenpreises y_i. Unabhängig von einem Raster der Kurve (zwei Knicke zwischen zwei Rasterpunkten zählen beide).
+    Gibt None zurück, wenn eine künstliche Variable in der Basis steht (dann gibt es keine einfache Bereichsgrenze)."""
+    cur, step = tab, (1.0 if b_to >= tab.inst.b[i] else -1.0)
+    count = 0
+    for _ in range(10_000):
+        if any(cur.basis[r] in cur.art for r in range(cur.m)):
+            return None
+        b = cur.inst.b[i]
+        d = step * cur.sign[i] * cur.binv()[:, i]                                          # Änderung von x_B je Einheit Fortschritt in Richtung b_to
+        x = cur.T[:cur.m, -1]
+        limits = [max(x[r], 0.0) / -d[r] for r in range(cur.m) if d[r] < -TOL]
+        if not limits:
+            return count
+        b_lim = b + step * min(limits)
+        if step * (b_lim - b_to) >= -TOL:
+            return count
+        nxt = b_lim + step * 1e-7 * max(1.0, abs(b_lim))
+        res = reoptimize(apply_rhs(cur, i, nxt - b), rule)
+        if res.status != "optimal" or res.method == "cold":
+            return count
+        count += abs(res.y[i] - cur.y()[i]) > 1e-9
+        cur = res.tab
+    return count

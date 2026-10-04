@@ -233,7 +233,7 @@ else:
             st.info("Die Wertkurve gibt es nur für ≤-Ressourcen (Kapazitäten).")
         else:
             st.plotly_chart(build_parametric(pr, inst.row_names[settings.res_i], inst.b[settings.res_i]), width="stretch", key="s4_curve")
-            st.markdown(f"**{pr['total_warm']} Pivots warm gegen {pr['total_cold']} kalt** für alle {C.CURVE_POINTS} Punkte; die Kurve hat entlang der Punkte **{pr['basis_changes']} Basiswechsel**: der Warmstart braucht je Basiswechsel einen Pivot.")
+            st.markdown(f"**{pr['total_warm']} Pivots warm gegen {pr['total_cold']} kalt** für alle {C.CURVE_POINTS} Punkte; die Kurve hat im Fenster **{pr['basis_changes']} Basiswechsel** (Knickpunkte, unabhängig vom Raster gezählt): der Warmstart braucht je Basiswechsel einen Pivot.")
 
     st.markdown("---")
     st.markdown("## ⚙️ Der gewählte Fall")

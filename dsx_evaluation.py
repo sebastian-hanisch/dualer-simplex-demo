@@ -195,7 +195,7 @@ def dive(settings, steps=C.DIVE_STEPS):
 @lru_cache(maxsize=64)
 def parametric(settings, points=C.CURVE_POINTS):
     """Wertkurve z*(b_i) im Fenster [b - 0.6 s, b + 1.5 s] (s = max(1, |b|)) über `points` Punkte: kalt (jeder Punkt von Null) gegen warm (von der Ausgangsbasis aus nach oben und nach unten fortgeführt); dazu die Zahl der
-    Basiswechsel entlang der Kurve."""
+    Basiswechsel (Knickpunkte) der Kurve im Fenster."""
     inst = instance_of(settings)
     i = settings.res_i
     sol, tab = R.solve_cold(inst)
@@ -221,5 +221,8 @@ def parametric(settings, points=C.CURVE_POINTS):
             bases[k] = tuple(sorted(w.tab.basis))
             cur, b_cur = w.tab, grid[k]
     seq = [bases[k] for k in sorted(bases)]
-    changes = sum(1 for a, b in zip(seq, seq[1:]) if a != b)
+    changes = sum(1 for a, b in zip(seq, seq[1:]) if a != b)                                # Basen an den Rasterpunkten: zwei Knicke zwischen zwei Punkten zählen nur einmal
+    exact = [R.rhs_breakpoints(tab, i, grid[-1], settings.rule), R.rhs_breakpoints(tab, i, grid[0], settings.rule)]
+    if None not in exact:
+        changes = sum(exact)                                                                # Knickpunkte der Kurve im Fenster, unabhängig vom Raster
     return {"grid": [float(v) for v in grid], "z": z, "warm": warm, "cold": cold, "basis_changes": changes, "total_warm": sum(warm), "total_cold": sum(cold)}
